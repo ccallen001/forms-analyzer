@@ -64,46 +64,75 @@ export default function VideoUpload({ onUpload, analyzing }: VideoUploadProps) {
     setPreview(null);
   };
 
+  const loadSampleVideo = async () => {
+    try {
+      const response = await fetch('/samples/sample-form.mov');
+      const blob = await response.blob();
+      const file = new File([blob], 'sample-form.mov', {
+        type: 'video/quicktime',
+      });
+      handleFile(file);
+    } catch (error) {
+      alert('Failed to load sample video');
+    }
+  };
+
   return (
     <div className="bg-white rounded-xl p-8 shadow-2xl border-2 border-gray-200">
       {!selectedFile ? (
-        <div
-          className={`border-3 border-dashed rounded-lg p-12 text-center transition-all ${
-            dragActive
-              ? 'border-yellow-600 bg-yellow-50'
-              : 'border-gray-300 hover:border-gray-400'
-          }`}
-          onDragEnter={handleDrag}
-          onDragLeave={handleDrag}
-          onDragOver={handleDrag}
-          onDrop={handleDrop}
-        >
-          <input
-            type="file"
-            id="video-upload"
-            accept="video/*"
-            onChange={handleChange}
-            className="hidden"
-            disabled={analyzing}
-          />
-          <label htmlFor="video-upload" className="cursor-pointer">
-            <div className="text-6xl mb-4">🥋</div>
-            <p className="text-xl text-black mb-2 font-semibold">
-              Drag and drop your video here
-            </p>
-            <p className="text-gray-500 mb-4">or</p>
+        <>
+          <div
+            className={`border-3 border-dashed rounded-lg p-12 text-center transition-all ${
+              dragActive
+                ? 'border-yellow-600 bg-yellow-50'
+                : 'border-gray-300 hover:border-gray-400'
+            }`}
+            onDragEnter={handleDrag}
+            onDragLeave={handleDrag}
+            onDragOver={handleDrag}
+            onDrop={handleDrop}
+          >
+            <input
+              type="file"
+              id="video-upload"
+              accept="video/*"
+              onChange={handleChange}
+              className="hidden"
+              disabled={analyzing}
+            />
+            <label htmlFor="video-upload" className="cursor-pointer">
+              <div className="text-6xl mb-4">🥋</div>
+              <p className="text-xl text-black mb-2 font-semibold">
+                Drag and drop your video here
+              </p>
+              <p className="text-gray-500 mb-4">or</p>
+              <button
+                type="button"
+                className="px-6 py-3 bg-black hover:bg-gray-800 text-white rounded-lg font-semibold transition-colors shadow-md"
+                onClick={() => document.getElementById('video-upload')?.click()}
+              >
+                Browse Files
+              </button>
+              <p className="text-sm text-gray-500 mt-4">
+                Supported formats: MP4, MOV, AVI, WebM
+              </p>
+            </label>
+          </div>
+
+          {/* Sample Video Button */}
+          <div className="mt-6 text-center">
             <button
               type="button"
-              className="px-6 py-3 bg-black hover:bg-gray-800 text-white rounded-lg font-semibold transition-colors shadow-md"
-              onClick={() => document.getElementById('video-upload')?.click()}
+              onClick={loadSampleVideo}
+              className="px-6 py-2 bg-gradient-to-r from-yellow-50 to-yellow-100 hover:from-yellow-100 hover:to-yellow-200 text-black rounded-lg font-semibold transition-all duration-300 border-2 border-yellow-600 shadow-md hover:shadow-lg hover:scale-105"
             >
-              Browse Files
+              🎬 Try Sample Video
             </button>
-            <p className="text-sm text-gray-500 mt-4">
-              Supported formats: MP4, MOV, AVI, WebM
+            <p className="text-xs text-gray-500 mt-2">
+              Don&apos;t have a video? Try a sample form video.
             </p>
-          </label>
-        </div>
+          </div>
+        </>
       ) : (
         <div className="space-y-6">
           <div className="rounded-lg overflow-hidden bg-black">
@@ -125,28 +154,16 @@ export default function VideoUpload({ onUpload, analyzing }: VideoUploadProps) {
             <button
               onClick={handleAnalyze}
               disabled={analyzing}
-              className="flex-1 px-6 py-4 bg-black hover:bg-gray-800 text-white rounded-lg font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg border-2 border-yellow-600"
+              className="flex-1 px-6 py-4 bg-black hover:bg-gray-800 text-white rounded-lg font-bold text-lg transition-all disabled:cursor-not-allowed shadow-lg border-2 border-yellow-600"
             >
               {analyzing ? (
-                <span className="flex items-center justify-center gap-2">
-                  <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
-                    <circle
-                      className="opacity-25"
-                      cx="12"
-                      cy="12"
-                      r="10"
-                      stroke="currentColor"
-                      strokeWidth="4"
-                      fill="none"
-                    />
-                    <path
-                      className="opacity-75"
-                      fill="currentColor"
-                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                    />
-                  </svg>
-                  Analyzing...
-                </span>
+                <div className="sparring-container">
+                  <span className="fighter fighter-left">🥋</span>
+                  <span className="impact" style={{ fontSize: '16px' }}>
+                    💥
+                  </span>
+                  <span className="fighter fighter-right">🥋</span>
+                </div>
               ) : (
                 'Analyze Form'
               )}
@@ -154,7 +171,7 @@ export default function VideoUpload({ onUpload, analyzing }: VideoUploadProps) {
             <button
               onClick={handleReset}
               disabled={analyzing}
-              className="px-6 py-4 bg-white hover:bg-gray-100 text-black rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed border-2 border-gray-300"
+              className="px-6 py-4 bg-white hover:bg-gray-100 text-black rounded-lg font-semibold transition-colors disabled:cursor-not-allowed border-2 border-gray-300"
             >
               Reset
             </button>

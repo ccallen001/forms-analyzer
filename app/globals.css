@@ -18,3 +18,67 @@ body {
     text-wrap: balance;
   }
 }
+
+/* 8-bit Sparring Animation */
+@keyframes punch-left {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(8px); }
+}
+
+@keyframes punch-right {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(-8px); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.fighter {
+  display: inline-block;
+  font-size: 24px;
+  animation: bounce 0.6s ease-in-out infinite;
+}
+
+.fighter-left {
+  animation: punch-left 0.8s ease-in-out infinite;
+}
+
+.fighter-right {
+  animation: punch-right 0.8s ease-in-out infinite;
+}
+
+.sparring-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 8px;
+}
+
+/* Impact effect */
+@keyframes impact {
+  0%, 100% { opacity: 0; transform: scale(0.5); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+.impact {
+  display: inline-block;
+  animation: impact 0.8s ease-in-out infinite;
+}
+
+/* Animated ellipsis */
+@keyframes ellipsis {
+  0% { content: '.'; }
+  33% { content: '..'; }
+  66% { content: '...'; }
+  100% { content: '.'; }
+}
+
+.ellipsis::after {
+  content: '.';
+  animation: ellipsis 1.5s infinite;
+  display: inline-block;
+  width: 1.5em;
+  text-align: left;
+}
