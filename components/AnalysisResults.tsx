@@ -8,29 +8,31 @@ export default function AnalysisResults({ analysis }: AnalysisResultsProps) {
   const sections = parseAnalysis(analysis);
 
   return (
-    <div className="mt-8 bg-white/10 backdrop-blur-lg rounded-xl p-8 shadow-2xl border border-white/20">
-      <h2 className="text-3xl font-bold text-white mb-6 flex items-center gap-3">
-        <span>📊</span>
-        Analysis Results
-      </h2>
+    <div className="mt-8 bg-white rounded-xl p-8 shadow-2xl border-2 border-gray-200">
+      <div className="border-b-2 border-yellow-600 pb-4 mb-6">
+        <h2 className="text-3xl font-bold text-black flex items-center gap-3">
+          <span>📊</span>
+          Analysis Results
+        </h2>
+      </div>
 
-      <div className="prose prose-invert max-w-none">
+      <div className="prose prose-zinc max-w-none">
         {sections.map((section, index) => (
           <div key={index} className="mb-6">
             {section.title && (
-              <h3 className="text-xl font-semibold text-purple-300 mb-3">
+              <h3 className="text-xl font-semibold text-black mb-3 border-l-4 border-yellow-600 pl-3">
                 {section.title}
               </h3>
             )}
-            <div className="text-gray-200 whitespace-pre-wrap leading-relaxed">
+            <div className="text-gray-800 whitespace-pre-wrap leading-relaxed">
               {section.content}
             </div>
           </div>
         ))}
       </div>
 
-      <div className="mt-8 p-4 bg-purple-500/20 border border-purple-400 rounded-lg">
-        <p className="text-purple-200 text-sm">
+      <div className="mt-8 p-4 bg-yellow-50 border-2 border-yellow-600 rounded-lg">
+        <p className="text-gray-900 text-sm">
           💡 <strong>Tip:</strong> Practice the suggested improvements and upload
           another video to track your progress!
         </p>

@@ -94,13 +94,14 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
+    <div className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black">
       <div className="container mx-auto px-4 py-12">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-white mb-4">
+          <h1 className="text-5xl font-bold text-white mb-2 tracking-tight">
             Martial Arts Form Analyzer
           </h1>
-          <p className="text-xl text-gray-300">
+          <div className="w-24 h-1 bg-gradient-to-r from-transparent via-yellow-600 to-transparent mx-auto mb-4"></div>
+          <p className="text-xl text-gray-400">
             Upload a video of your form and get AI-powered feedback
           </p>
         </div>
@@ -112,8 +113,8 @@ export default function Home() {
           />
 
           {error && (
-            <div className="mt-8 p-4 bg-red-500/20 border border-red-500 rounded-lg">
-              <p className="text-red-200">{error}</p>
+            <div className="mt-8 p-4 bg-red-950 border border-red-800 rounded-lg">
+              <p className="text-red-300">{error}</p>
             </div>
           )}
 

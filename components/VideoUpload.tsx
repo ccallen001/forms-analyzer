@@ -65,13 +65,13 @@ export default function VideoUpload({ onUpload, analyzing }: VideoUploadProps) {
   };
 
   return (
-    <div className="bg-white/10 backdrop-blur-lg rounded-xl p-8 shadow-2xl border border-white/20">
+    <div className="bg-white rounded-xl p-8 shadow-2xl border-2 border-gray-200">
       {!selectedFile ? (
         <div
           className={`border-3 border-dashed rounded-lg p-12 text-center transition-all ${
             dragActive
-              ? 'border-purple-400 bg-purple-500/20'
-              : 'border-gray-400 hover:border-purple-400'
+              ? 'border-yellow-600 bg-yellow-50'
+              : 'border-gray-300 hover:border-gray-400'
           }`}
           onDragEnter={handleDrag}
           onDragLeave={handleDrag}
@@ -88,18 +88,18 @@ export default function VideoUpload({ onUpload, analyzing }: VideoUploadProps) {
           />
           <label htmlFor="video-upload" className="cursor-pointer">
             <div className="text-6xl mb-4">🥋</div>
-            <p className="text-xl text-white mb-2">
+            <p className="text-xl text-black mb-2 font-semibold">
               Drag and drop your video here
             </p>
-            <p className="text-gray-300 mb-4">or</p>
+            <p className="text-gray-500 mb-4">or</p>
             <button
               type="button"
-              className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-semibold transition-colors"
+              className="px-6 py-3 bg-black hover:bg-gray-800 text-white rounded-lg font-semibold transition-colors shadow-md"
               onClick={() => document.getElementById('video-upload')?.click()}
             >
               Browse Files
             </button>
-            <p className="text-sm text-gray-400 mt-4">
+            <p className="text-sm text-gray-500 mt-4">
               Supported formats: MP4, MOV, AVI, WebM
             </p>
           </label>
@@ -114,9 +114,9 @@ export default function VideoUpload({ onUpload, analyzing }: VideoUploadProps) {
             />
           </div>
 
-          <div className="bg-white/5 rounded-lg p-4">
-            <p className="text-white font-semibold mb-1">{selectedFile.name}</p>
-            <p className="text-gray-400 text-sm">
+          <div className="bg-gray-50 rounded-lg p-4 border border-gray-200">
+            <p className="text-black font-semibold mb-1">{selectedFile.name}</p>
+            <p className="text-gray-600 text-sm">
               {(selectedFile.size / 1024 / 1024).toFixed(2)} MB
             </p>
           </div>
@@ -125,7 +125,7 @@ export default function VideoUpload({ onUpload, analyzing }: VideoUploadProps) {
             <button
               onClick={handleAnalyze}
               disabled={analyzing}
-              className="flex-1 px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white rounded-lg font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg"
+              className="flex-1 px-6 py-4 bg-black hover:bg-gray-800 text-white rounded-lg font-bold text-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg border-2 border-yellow-600"
             >
               {analyzing ? (
                 <span className="flex items-center justify-center gap-2">
@@ -154,7 +154,7 @@ export default function VideoUpload({ onUpload, analyzing }: VideoUploadProps) {
             <button
               onClick={handleReset}
               disabled={analyzing}
-              className="px-6 py-4 bg-white/10 hover:bg-white/20 text-white rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="px-6 py-4 bg-white hover:bg-gray-100 text-black rounded-lg font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed border-2 border-gray-300"
             >
               Reset
             </button>
